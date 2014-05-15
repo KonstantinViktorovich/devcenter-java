@@ -1,4 +1,4 @@
-(https://www.codeship.io/projects/4d736200-be0b-0131-9044-46bf180c8b06/status)
+https://www.codeship.io/projects/4d736200-be0b-0131-9044-46bf180c8b06/status
 
 This quickstart will get you going with Java and the [Jetty](http://eclipse.org/jetty/) embedded web server, deployed to Heroku.
 
