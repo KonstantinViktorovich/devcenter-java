@@ -14,8 +14,8 @@ public class HelloWorld extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp)
             throws ServletException, IOException {
-        //resp.getWriter().print("Hello from Java!\n");
-		
+        resp.getWriter().print("Hello from Java!\n");
+		/*
 		Statement stmt = null;
 	    ResultSet rs;
 		try {
@@ -27,7 +27,7 @@ public class HelloWorld extends HttpServlet {
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
-		}
+		}*/
 		
     }
 
