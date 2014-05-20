@@ -37,6 +37,11 @@ public class HelloWorld extends HttpServlet {
         Statement stmt = connection.createStatement();
         stmt.executeUpdate("INSERT INTO ticks VALUES (now())");
 
+		ResultSet rs = stmt.executeQuery("SELECT tick FROM ticks");
+        while (rs.next()) {
+            System.out.println("Read from DB: " + rs.getTimestamp("tick"));
+        }
+		
 	    Server server = new Server(Integer.valueOf(System.getenv("PORT")));
         ServletContextHandler context = new ServletContextHandler(ServletContextHandler.SESSIONS);
         context.setContextPath("/");
