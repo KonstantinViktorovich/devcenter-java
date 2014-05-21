@@ -21,9 +21,9 @@ public class HelloWorld extends HttpServlet {
 			stmt = connection.createStatement();
 			rs = stmt.executeQuery("SELECT tick FROM ticks");
 			rs.next();
-			//while (rs.next()) {
+			while (rs.next()) {
 				resp.getWriter().println("Read from DB: " + rs.getTimestamp("tick"));
-			//}
+			}
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
