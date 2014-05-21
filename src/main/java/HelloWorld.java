@@ -14,21 +14,19 @@ public class HelloWorld extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp)
             throws ServletException, IOException {
-        resp.getWriter().print("Hello from Java!\n");
-		/*
-		Statement stmt = null;
-	    ResultSet rs;
+
 		try {
+		    Statement stmt = null;
+		    ResultSet rs;
 			stmt = connection.createStatement();
 			rs = stmt.executeQuery("SELECT tick FROM ticks");
 			rs.next();
-			while (rs.next()) {
+			//while (rs.next()) {
 				resp.getWriter().println("Read from DB: " + rs.getTimestamp("tick"));
-			}
+			//}
 		} catch (SQLException e) {
 			e.printStackTrace();
-		}*/
-		
+		}
     }
 
     public static void main(String[] args) throws Exception{
