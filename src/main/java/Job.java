@@ -10,7 +10,7 @@ public class Job {
         Statement stmt = connection.createStatement();
         stmt.executeUpdate("INSERT INTO ticks VALUES (now())");
 
-        System.out.println("!!!!! Сработало !!!!!");
+        System.out.println("!!!!! It works !!!!!");
 	}
 
 	private static Connection getConnection() throws URISyntaxException, SQLException {

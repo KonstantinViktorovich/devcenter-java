@@ -23,7 +23,7 @@ public class HelloWorld extends HttpServlet {
 			rs.next();
 			while (rs.next()) {
 				resp.getWriter().println("Read from DB: " + rs.getTimestamp("tick"));
-				System.out.println("!!!!! Read from DB: " + rs.getTimestamp("tick"));
+				System.out.println("!!!!! : " + rs.getTimestamp("tick"));
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
