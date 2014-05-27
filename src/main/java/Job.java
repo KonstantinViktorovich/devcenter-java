@@ -9,7 +9,7 @@ public class Job {
     	Connection connection = getConnection();      
         Statement stmt = connection.createStatement();
         stmt.executeUpdate("INSERT INTO ticks VALUES (now())");
-
+        stmt.executeUpdate("INSERT INTO feeds(title, xmlUrl, htmlUrl)VALUES ('Тест', 'http://www.bankfax.ru/rss.xml', 'http://www.bankfax.ru/');");
         System.out.println("!!!!! It works !!!!!");
 	}
 

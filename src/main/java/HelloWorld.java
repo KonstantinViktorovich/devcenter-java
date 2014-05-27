@@ -1,4 +1,4 @@
-import java.io.IOException;
+﻿import java.io.IOException;
 import javax.servlet.ServletException;
 import javax.servlet.http.*;
 import org.eclipse.jetty.server.Server;
@@ -8,26 +8,32 @@ import java.net.URISyntaxException;
 import java.sql.*;
 
 public class HelloWorld extends HttpServlet {
+	private static final long serialVersionUID = 1980594051856701491L;
 	static Connection connection;
 	
-
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp)
             throws ServletException, IOException {
-
+    	
+    	
 		try {
 		    Statement stmt = null;
 		    ResultSet rs;
 			stmt = connection.createStatement();
-			rs = stmt.executeQuery("SELECT tick FROM ticks");
+			rs = stmt.executeQuery("SELECT id, title, xmlurl, htmlurl FROM feeds;");
+			
+			resp.getWriter().println("<html lang=\"ru\"><head><title>Мониторинг прессы АК</title><meta http-equiv=\"content-type\" content=\"text/html; charset=utf-8\" /></head><body>Тра-ля-ля<br>");
 			rs.next();
 			while (rs.next()) {
-				resp.getWriter().println("Read from DB: " + rs.getTimestamp("tick"));
-				System.out.println("!!!!! : " + rs.getTimestamp("tick"));
-			}
+				resp.getWriter().println("Read from DB: " + rs.getString("title") + "<br>");
+			}		
+			resp.getWriter().println("</body>");
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
+		//resp.getWriter().println("<H1>Тра-ля-ля</H1>");
+		System.out.println(System.getProperty("file.encoding"));
+		System.out.println("!!! Тра-ля-ля !!!");
     }
 
     public static void main(String[] args) throws Exception{
