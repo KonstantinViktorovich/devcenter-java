@@ -26,15 +26,15 @@ public class HelloWorld extends HttpServlet {
 			resp.getWriter().println("<html><head><title>Мониторинг прессы АК</title><meta http-equiv=\"content-type\" content=\"text/html; charset=utf-8\" /></head><body>Тра-ля-ля<br>");
 			rs.next();
 			while (rs.next()) {
-				resp.getWriter().println("Чтение из БД: © " + rs.getString("published") +"  "+ rs.getString("title") + "<br>");
+				resp.getWriter().println("Чтение из БД: © " + rs.getString("published") +"  "+ rs.getString("title")+"  "+ rs.getString("link_href") + "<br>");
 			}		
 			resp.getWriter().println("</body></html>");
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
 		//resp.getWriter().println("<H1>Тра-ля-ля</H1>");
-		System.out.println(System.getProperty("file.encoding"));
-		System.out.println("!!! Тра-ля-ля © !!!");
+		//System.out.println(System.getProperty("file.encoding"));
+		//System.out.println("!!! Тра-ля-ля © !!!");
     }
 
     public static void main(String[] args) throws Exception{
