@@ -22,6 +22,21 @@
             <artifactId>postgresql</artifactId>
             <version>9.0-801.jdbc4</version>
         </dependency>
+        <dependency>
+        	<groupId>net.java.dev.rome</groupId>
+        	<artifactId>rome</artifactId>
+        	<version>1.0.0</version>
+        </dependency>
+        <dependency>
+        	<groupId>org.apache.httpcomponents</groupId>
+        	<artifactId>httpclient</artifactId>
+        	<version>4.3.3</version>
+        </dependency>
+        <dependency>
+        	<groupId>commons-httpclient</groupId>
+        	<artifactId>commons-httpclient</artifactId>
+        	<version>20020423</version>
+        </dependency>
     </dependencies>
     <build>
         <plugins>
