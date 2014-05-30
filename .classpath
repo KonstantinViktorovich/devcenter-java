@@ -13,7 +13,7 @@
 	<classpathentry kind="var" path="M2_REPO/postgresql/postgresql/9.0-801.jdbc4/postgresql-9.0-801.jdbc4.jar"/>
 	<classpathentry kind="var" path="M2_REPO/org/apache/httpcomponents/httpclient/4.1.1/httpclient-4.1.1.jar"/>
 	<classpathentry kind="var" path="M2_REPO/commons-httpclient/commons-httpclient/20020423/commons-httpclient-20020423.jar"/>
-	<classpathentry kind="var" path="M2_REPO/rome/rome/1.0/rome-1.0.jar"/>
+	<classpathentry kind="var" path="M2_REPO/rome/rome/1.0/rome-1.0.jar" sourcepath="/M2_REPO/rome/rome/1.0/rome-1.0-sources.jar"/>
 	<classpathentry kind="lib" path="C:/Users/Пользователь/.m2/repository/org/apache/httpcomponents/httpcore/4.1/httpcore-4.1.jar" sourcepath="C:/Users/Пользователь/.m2/repository/org/apache/httpcomponents/httpcore/4.1/httpcore-4.1-sources.jar">
 		<attributes>
 			<attribute name="maven.pomderived" value="true"/>
