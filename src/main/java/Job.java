@@ -24,6 +24,8 @@ public class Job {
     	Connection connection = getConnection();      
         Statement feedstmt = connection.createStatement();
         Statement newsstmt = connection.createStatement();
+        
+        newsstmt.execute("DROP TABLE news;CREATE TABLE news(id serial NOT NULL, feed_id integer, description character varying, content character varying, title character varying, published timestamp without time zone, authorname character varying, category character varying, link_href character varying, CONSTRAINT news_pkey PRIMARY KEY (id));");
 
         ResultSet rs = feedstmt.executeQuery("SELECT id, title, xmlurl, htmlurl FROM feeds;");
         URL url = null;
