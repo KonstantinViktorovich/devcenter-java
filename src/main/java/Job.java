@@ -23,17 +23,17 @@ public class Job {
     	Class.forName("org.postgresql.Driver");
     	Connection connection = getConnection();      
         Statement feedstmt = connection.createStatement();
-        Statement newsstmt = connection.createStatement();
+        PreparedStatement newsstmt = connection.prepareStatement("DROP TABLE news;"
++ "CREATE TABLE news(id serial NOT NULL, feed_id integer, description character varying, content character varying, title character varying, published timestamp without time zone, authorname character varying, category character varying, link_href character varying, CONSTRAINT news_pkey PRIMARY KEY (id));");
+        newsstmt.executeUpdate();
         
-        newsstmt.execute("DROP TABLE news;CREATE TABLE news(id serial NOT NULL, feed_id integer, description character varying, content character varying, title character varying, published timestamp without time zone, authorname character varying, category character varying, link_href character varying, CONSTRAINT news_pkey PRIMARY KEY (id));");
-
         ResultSet rs = feedstmt.executeQuery("SELECT id, title, xmlurl, htmlurl FROM feeds;");
         URL url = null;
         Calendar c = Calendar.getInstance();
         DefaultHttpClient httpClient = new DefaultHttpClient();
         
         rs.next();
-		while (rs.next()) {
+		//while (rs.next()) {
 			url = new URL(rs.getString("xmlurl"));
 			HttpGet pageGet = new HttpGet(url.toURI());
 			HttpResponse response = httpClient.execute(pageGet);
@@ -51,26 +51,27 @@ public class Job {
 	        Iterator<SyndFeed> itEntries = entries.iterator();
 	 
         
+	        newsstmt = connection.prepareStatement("INSERT INTO news(feed_id, description, content, title, published, authorname, category, link_href) VALUES (?, ?, ?, ?, ?, ?, ?, ?)");
 	        while (itEntries.hasNext()) {
 	            SyndEntry entry = (SyndEntry) itEntries.next();
-	            c.setTime(entry.getPublishedDate());
 
-	            newsstmt.executeUpdate("INSERT INTO news(feed_id, description, content, title, published, authorname, category, link_href) VALUES " 
-	            		+ "("+rs.getString("id")
-	            		+ ", '" + entry.getDescription().getValue()
-	            		+ "', '" + entry.getContents()
-	            		+ "', '"  + entry.getTitle()
-	            		+ "', '" + c.get(Calendar.YEAR)+"-"+c.get(Calendar.MONTH)+"-"+c.get(Calendar.DAY_OF_MONTH)
-	            		+ " "+c.get(Calendar.HOUR_OF_DAY)+":"+c.get(Calendar.MINUTE)+":"+c.get(Calendar.SECOND)
-	            		+ "', '"
-	            		+ entry.getAuthor()
-	            		+ "', '" + entry.getCategories()
-	            		+ "', '" + entry.getLink()+"');");
+
+	            newsstmt.setInt(1, rs.getInt("id"));
+	            newsstmt.setString(2, entry.getDescription().getValue());
+	            newsstmt.setString(3, entry.getContents().toString());
+	            newsstmt.setString(4, entry.getTitle());
+	            c.setTime(entry.getPublishedDate());
+	            newsstmt.setDate(5, new java.sql.Date(c.getTimeInMillis()));
+	            newsstmt.setString(6, entry.getAuthor());
+	            newsstmt.setString(7, entry.getCategories().toString());
+	            newsstmt.setString(8, entry.getLink());
+
+	            newsstmt.executeUpdate();
 	        }
 			
 		}	
 
-	}
+	//}
 
 	private static Connection getConnection() throws URISyntaxException, SQLException {
         URI dbUri = new URI(System.getenv("DATABASE_URL"));

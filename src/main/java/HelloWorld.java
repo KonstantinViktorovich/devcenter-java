@@ -40,7 +40,7 @@ public class HelloWorld extends HttpServlet {
     	feed.setFeedType(feedType);
     	feed.setTitle("Мониторинг СМИ АК и РА");
     	feed.setLink("http://localhost:5000");
-    	feed.setDescription("This feed has been created using ROME (Java syndication utilities");
+    	feed.setDescription("Все новости Алтая");
    
         @SuppressWarnings("rawtypes")
 		List entries = new ArrayList();
@@ -58,18 +58,20 @@ public class HelloWorld extends HttpServlet {
 			while (rs.next()) {
 				
 		        entry = new SyndEntryImpl();
-		        entry.setTitle("title");
+		        entry.setTitle(rs.getString("title"));
 		        entry.setLink(rs.getString("link_href"));
 		        entry.setPublishedDate(DateParser.parseDate(rs.getString("published")));
+
 		        description = new SyndContentImpl();
 		        description.setType("text/plain");
-		        description.setValue("description");
+		        description.setValue(rs.getString("description"));
 		        entry.setDescription(description);
+		        entry.setContents(null);
 		        entries.add(entry);
 				
 				//resp.getWriter().println("Чтение из БД: © " + rs.getString("published") +"  "+ rs.getString("title")+"  "+ rs.getString("link_href") + "<br>");
 			}		
-			//resp.getWriter().println("</body></html>");
+
 	        feed.setEntries(entries);
 	        
 	        StringWriter writer = new StringWriter();
@@ -79,6 +81,7 @@ public class HelloWorld extends HttpServlet {
 			} catch (FeedException e1) {
 				e1.printStackTrace();
 			}
+	        resp.setContentType("text/html; charset=UTF-8");
 	        resp.getWriter().println(writer.toString());
 			
 		} catch (SQLException e) {
